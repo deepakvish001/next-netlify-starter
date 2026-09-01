@@ -1,90 +1,85 @@
-# Next + Netlify Starter
+# LaunchEdge
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/46648482-644c-4c80-bafb-872057e51b6b/deploy-status)](https://app.netlify.com/sites/next-dev-starter/deploys)
+LaunchEdge is a compact Next.js and Netlify application baseline for teams that want a clear starting point for production-oriented web projects. It currently provides a Next.js 12 application, reusable header and footer components, global and component-scoped styling, Cypress browser tests, absolute imports, and Netlify build configuration.
 
-This is a [Next.js](https://nextjs.org/) v12 project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) and set up to be instantly deployed to [Netlify](https://url.netlify.com/SyTBPVamO)!
+> The repository is being evolved from a minimal starter into a documented, tested, and deployment-ready application foundation.
 
-This project is a very minimal starter that includes 2 sample components, a global stylesheet, a `netlify.toml` for deployment, and a `jsconfig.json` for setting up absolute imports and aliases. With Netlify, you'll have access to features like Preview Mode, server-side rendering/incremental static regeneration via Netlify Functions, and internationalized routing on deploy automatically.
+## Current capabilities
 
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/netlify-templates/next-netlify-starter&utm_source=github&utm_medium=nextstarter-cs&utm_campaign=devex-cs)
+- Next.js pages-based application structure
+- React 18 user interface
+- Reusable layout components
+- CSS Modules and global styles
+- Cypress end-to-end test baseline
+- Netlify build configuration
+- Absolute import support through `jsconfig.json`
+- Automated dependency update configuration
 
-(If you click this button, it will create a new repo for you that looks exactly like this one, and sets that repo up immediately for deployment on Netlify)
+## Technology stack
 
-## Table of Contents:
+| Area | Technology |
+| --- | --- |
+| Framework | Next.js 12 |
+| UI | React 18 |
+| Styling | CSS and CSS Modules |
+| Browser testing | Cypress 10 |
+| Hosting | Netlify |
+| Package manager | npm |
 
-- [Getting Started](#getting-started)
-- [Installation options](#installation-options)
-- [Testing](#testing)
-  - [Included Default Testing](#included-default-testing)
-  - [Removing Renovate](#removing-renovate)
-  - [Removing Cypress](#removing-cypress)
+## Project structure
 
-## Getting Started
+```text
+components/          Reusable interface components
+cypress/e2e/         Browser-level tests
+pages/               Next.js routes and app entry point
+public/              Static assets
+styles/              Global styles
+netlify.toml         Netlify build settings
+cypress.config.js    Cypress configuration
+```
 
-First, run the development server:
+## Prerequisites
+
+- Node.js 16 or newer for the current dependency baseline
+- npm 8 or newer
+
+## Local setup
 
 ```bash
+git clone <repository-url>
+cd <repository-directory>
+npm install
 npm run dev
-# or
-yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open `http://localhost:3000`. Changes under `pages`, `components`, and `styles` reload automatically during development.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## Available commands
 
-### Installation options
+| Command | Purpose |
+| --- | --- |
+| `npm run dev` | Start the local Next.js development server |
+| `npm run build` | Create a production build |
+| `npm run export` | Export supported routes as static files |
+| `npx cypress open` | Run Cypress interactively |
+| `npx cypress run` | Run Cypress in headless mode |
 
-**Option one:** One-click deploy
+## Netlify deployment
 
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/netlify-templates/next-netlify-starter&utm_source=github&utm_medium=nextstarter-cs&utm_campaign=devex-cs)
+The included `netlify.toml` runs `npm run build`, publishes the `.next` output, and loads the Cypress build plugin. Connect the repository to a Netlify site, review the detected build settings, and deploy from the default branch. Pull requests can then receive isolated deploy previews.
 
-**Option two:** Manual clone
+## Configuration
 
-1. Clone this repo: `git clone https://github.com/netlify-templates/next-netlify-starter.git`
-2. Navigate to the directory and run `npm install`
-3. Run `npm run dev`
-4. Make your changes
-5. Connect to [Netlify](https://url.netlify.com/Bk4UicocL) manually (the `netlify.toml` file is the one you'll need to make sure stays intact to make sure the export is done and pointed to the right stuff)
+The baseline does not require application secrets. Future environment variables should be documented in `.env.example`, configured in the hosting dashboard, and never committed with real credentials.
 
-## Testing
+## Roadmap
 
-### Included Default Testing
+Planned work includes a modern framework upgrade, TypeScript migration, accessible navigation, reusable page metadata, error boundaries, loading states, structured logging, environment validation, stronger Cypress coverage, unit tests, linting, formatting, security headers, performance budgets, continuous integration, and deployment documentation.
 
-We’ve included some tooling that helps us maintain these templates. This template currently uses:
+## Contributing
 
-- [Renovate](https://www.mend.io/free-developer-tools/renovate/) - to regularly update our dependencies
-- [Cypress](https://www.cypress.io/) - to run tests against how the template runs in the browser
-- [Cypress Netlify Build Plugin](https://github.com/cypress-io/netlify-plugin-cypress) - to run our tests during our build process
+Create focused branches from `main`, include tests for behavior changes, confirm `npm run build` succeeds, and describe deployment or configuration impact in the pull request. Keep unrelated refactors separate so changes remain easy to review and merge.
 
-If your team is not interested in this tooling, you can remove them with ease!
+## License
 
-### Removing Renovate
-
-In order to keep our project up-to-date with dependencies we use a tool called [Renovate](https://github.com/marketplace/renovate). If you’re not interested in this tooling, delete the `renovate.json` file and commit that onto your main branch.
-
-### Removing Cypress
-
-For our testing, we use [Cypress](https://www.cypress.io/) for end-to-end testing. This makes sure that we can validate that our templates are rendering and displaying as we’d expect. By default, we have Cypress not generate deploy links if our tests don’t pass. If you’d like to keep Cypress and still generate the deploy links, go into your `netlify.toml` and delete the plugin configuration lines:
-
-```diff
-[[plugins]]
-  package = "netlify-plugin-cypress"
--  [plugins.inputs.postBuild]
--    enable = true
--
--  [plugins.inputs]
--    enable = false 
-```
-
-If you’d like to remove the `netlify-plugin-cypress` build plugin entirely, you’d need to delete the entire block above instead. And then make sure sure to remove the package from the dependencies using:
-
-```bash
-npm uninstall -D netlify-plugin-cypress
-```
-
-And lastly if you’d like to remove Cypress entirely, delete the entire `cypress` folder and the `cypress.config.ts` file. Then remove the dependency using:
-
-```bash
-npm uninstall -S cypress
-```
+Retain all license notices and third-party attribution files distributed with the project.
